@@ -8,7 +8,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 export default function Navbar() {
   return (
-    <nav className="w-full h-16 border-b bg-white flex items-center justify-between px-6">
+    <nav className="w-full h-16 flex items-center justify-between px-6">
       {/* LEFT SECTION */}
       <div className="flex items-center gap-12">
         {/* Logo */}
@@ -54,7 +54,7 @@ export default function Navbar() {
       {/* RIGHT SECTION */}
       <div className="flex items-center gap-4">
         {/* Invite Button */}
-        <button className="px-4 py-1.5 text-sm border border-[#DBDBD6] font-medium rounded-lg shadow shadow-[#0000001C]">
+        <button className="px-4 py-1.5 text-sm border bg-[#FFFFFF]  border-[#DBDBD6] font-medium rounded-lg shadow shadow-[#0000001C]">
           Invite members
         </button>
 

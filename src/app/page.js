@@ -1,11 +1,12 @@
+import WorksTable from "@/components/WorksTable";
 
 
 
 export default function Home() {
   return (
-    <div>
+    <div className="p-2">
 
-      <h1>Hello</h1>
+     <WorksTable />
     
     </div>
   );
