@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "../components/Navbar";
+import { WorkspaceProvider, useWorkspace } from "../context/WorkspaceContext";
 
 export default function AppShell({ children }) {
-  const [workspace, setWorkspace] = useState("Label 1");
-
   return (
-    <>
-      <Navbar onWorkspaceChange={setWorkspace} />
+    <WorkspaceProvider>
+      <NavbarWrapper />
       {children}
-    </>
+    </WorkspaceProvider>
   );
+}
+
+function NavbarWrapper() {
+  const { setWorkspace } = useWorkspace();
+  return <Navbar onWorkspaceChange={setWorkspace} />;
 }

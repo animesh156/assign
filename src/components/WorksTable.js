@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import Image from "next/image";
 import Pagination from "./Pagination";
 
@@ -11,8 +11,12 @@ import { VscSettings } from "react-icons/vsc";
 import { FaFolder, FaShieldAlt } from "react-icons/fa";
 import { HiMiniSparkles } from "react-icons/hi2";
 import { PiHouseLineFill } from "react-icons/pi";
+import CreateWorkModal from "./CreateWorkModal";
 
 export default function WorksTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+const currentWorkspace = "Label 5"; // later pass from parent
+
   const data = [
     {
       name: "Name of the document",
@@ -72,7 +76,7 @@ export default function WorksTable() {
               />
             </div>
 
-            <button className="flex items-center gap-1 px-3 py-1.5 text-sm bg-[#B39E37] text-white rounded-md">
+            <button onClick={() => setIsModalOpen(true)} className="flex cursor-pointer items-center gap-1 px-3 py-1.5 text-sm bg-[#B39E37] text-white rounded-md">
               <GoPlus size={18} />
               New
             </button>
@@ -170,6 +174,17 @@ export default function WorksTable() {
       <div className=" mb-24">
         <Pagination />
       </div>
+
+      <CreateWorkModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+ 
+  onCreate={(data) => {
+    console.log("Created:", data);
+    // later: add row to table
+  }}
+/>
+
     </div>
   );
 }
