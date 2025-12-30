@@ -55,7 +55,7 @@ export default function Document({ activeTab }) {
       </div>
 
       {/* RIGHT COLUMN (3 cols) */}
-      <div className="col-span-3 text-[#849494] py-7 px-3.5 border-l-2 h-[472px] border-[#ECECE7] pl-6">
+      <div className="col-span-3 text-[#849494] py-7 px-3.5 border-l-2 h-[488px] border-[#ECECE7] pl-6">
         <h3 className="font-medium mb-2">Properties</h3>
 
         <p className="mt-8">Last Updated</p>

@@ -9,7 +9,7 @@ import { IoIosArrowUp, IoIosArrowDown  } from "react-icons/io";
 
 export default function Pagination({ currentPage = 1, totalPages = 5 }) {
   return (
-    <div className="flex items-center px-4 justify-between mt-4">
+    <div className="flex items-center px-8 justify-between mt-4">
       {/* LEFT: Prev + Current Page + Next */}
       <div className="flex items-center gap-2">
         {/* Prev */}

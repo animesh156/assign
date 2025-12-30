@@ -67,13 +67,27 @@ export default function WorksTable() {
       {/* ================= HEADER ================= */}
       <div className="space-y-4">
         {/* Row 1 — Tabs */}
-        <div className="flex px-6 py-2.5 items-center gap-3 text-[#849494]">
-          <AiOutlineHome
-            size={18}
-            className="hover:text-[#13343B] border-r cursor-pointer"
-            onClick={() => setActiveTab(null)}
-          />
+        <div className="flex px-6 py-3.5 border-b items-center gap-3 border-[#ECECE7] text-[#849494]">
+          {/* HOME */}
+          <div className="border-r-2 w-11 border-[#ECECE7] flex justify-center">
+            <div
+              onClick={() => setActiveTab(null)}
+              className="relative cursor-pointer"
+            >
+              <Image
+                src={activeTab === null ? "/dark.svg" : "/Primary.svg"}
+                alt="home"
+                height={18}
+                width={18}
+                className="text-amber-400"
+              />
+              {activeTab === null && (
+                <span className="absolute left-0 -bottom-[15px] w-full h-[2px] bg-[#13343B]" />
+              )}
+            </div>
+          </div>
 
+          {/* DOCUMENT TABS */}
           {openTabs.map((tab) => {
             const isActive = activeTab === tab.name;
 
@@ -81,39 +95,33 @@ export default function WorksTable() {
               <div
                 key={tab.name}
                 onClick={() => setActiveTab(tab.name)}
-                className={`flex items-center font-medium gap-2 px-3 py-1 rounded-md text-sm cursor-pointer ${
-                  isActive
-                    ? " text-[#13343B]"
-                    : ""
-                }`}
+                className="relative flex items-center font-medium gap-2 px-3 text-sm cursor-pointer text-[#13343B]"
               >
                 {tab.name}
-                {/* <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setOpenTabs((prev) =>
-                      prev.filter((t) => t.name !== tab.name)
-                    );
-                    if (isActive) setActiveTab(null);
-                  }}
-                  className="text-xs"
-                >
-                  ✕
-                </button> */}
+                {isActive && (
+                  <span className="absolute left-0 -bottom-[14px] w-full h-[2px] bg-[#13343B]" />
+                )}
               </div>
             );
           })}
 
-          <AiOutlinePlus size={18} className="hover:text-[#13343B]" />
+          <AiOutlinePlus
+          onClick={() => setIsModalOpen(true)}
+            size={18}
+            className={`
+    hover:text-[#13343B]
+    cursor-pointer
+    ml-2 
+    ${activeTab === null ? "" : "border-l-2 border-[#ECECE7] w-16"}
+  `}
+          />
         </div>
-
-        <hr className="border-t border-[#ECECE7]" />
 
         {/* ===== ONLY SHOW WHEN HOME ===== */}
         {activeTab === null && (
           <>
             {/* Row 2 */}
-            <div className="flex px-6 items-center justify-between">
+            <div className="flex px-9 items-center justify-between">
               <div className="flex items-center gap-2 font-medium text-[#13343B]">
                 <FaFolder size={18} className="text-[#849494]" />
                 <span>Name of the Workspace</span>
@@ -134,7 +142,7 @@ export default function WorksTable() {
 
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="flex items-center gap-1 px-3 py-1.5 text-sm bg-[#B39E37] text-white rounded-md"
+                  className="flex cursor-pointer items-center gap-1 px-3 py-1.5 text-sm bg-[#B39E37] text-white rounded-md"
                 >
                   <GoPlus size={18} />
                   New
@@ -145,14 +153,19 @@ export default function WorksTable() {
             <hr className="border-t border-[#ECECE7]" />
 
             {/* Row 3 */}
-            <div className="flex px-6 items-center justify-between">
+            <div className="flex px-9 items-center justify-between">
               <button className="flex items-center gap-2 px-3 py-1 border border-[#DBDBD6] rounded-md text-sm shadow shadow-[#0000001C]">
                 <IoFilterOutline size={16} />
                 Filter
               </button>
 
               <button className="flex items-center gap-2 px-3 py-1 border border-[#DBDBD6] rounded-md text-sm shadow shadow-[#0000001C]">
-                <VscSettings size={16} />
+                <Image
+                  src="/display.svg"
+                  alt="setting"
+                  width={14}
+                  height={14}
+                />
                 Display
               </button>
             </div>
@@ -160,21 +173,26 @@ export default function WorksTable() {
         )}
       </div>
 
-     {activeTab === null && (<hr className="border-t border-[#ECECE7] mt-4" />
-)} 
+      {activeTab === null && <hr className="border-t border-[#ECECE7] mt-4" />}
+
       {/* ================= CONTENT ================= */}
       <div className="flex-1 overflow-auto">
-        {/* HOME TAB */}
         {activeTab === null && (
-          <table className="w-full text-sm">
-            <thead className="border-b border-[#ECECE7] text-[#849494]">
+          <table className="w-full text-sm table-fixed ">
+            {/* 🔒 LOCK COLUMN WIDTHS */}
+            <colgroup>
+              <col />
+              <col className="w-[190px]" />
+              <col className="w-[100px]" />
+              <col className="w-[120px]" />
+            </colgroup>
+
+            <thead className="border-b border-[#ECECE7]  font-medium text-[#849494]">
               <tr>
-                <th className="text-left px-6 py-3 font-light">Name</th>
-                <th className="text-right px-6 py-3 font-light">
-                  Last Updated
-                </th>
-                <th className="text-right px-6 py-3 font-light">Admin</th>
-                <th className="text-right px-6 py-3 font-light">Status</th>
+                <th className="text-left px-6 py-2 pl-9">Name</th>
+                <th className="text-right px-6 py-2 pr-16">Last Updated</th>
+                <th className="text-right px-6 py-2 ">Admin</th>
+                <th className="text-right px-4 py-2 pr-24">Status</th>
               </tr>
             </thead>
 
@@ -184,14 +202,13 @@ export default function WorksTable() {
                   key={index}
                   className="group border-b border-[#ECECE7] hover:bg-[#FAF9EF] text-[#13343B]"
                 >
-                  <td className="px-6 py-3 font-medium">
+                  <td className="px-6 py-3 pl-9 font-medium">
                     <div className="flex items-center gap-2">
                       {item.icon}
                       {item.name}
-
                       <button
                         onClick={() => handleOpenDoc(item)}
-                        className="flex items-center gap-1 px-3 py-1 bg-white border border-[#DDDAF2] rounded-md text-[#8B87A8] text-[13px] font-medium invisible group-hover:visible"
+                        className="flex cursor-pointer items-center gap-1 px-3 py-1 bg-white border border-[#DDDAF2] rounded-md text-[#8B87A8] text-[13px] font-medium invisible group-hover:visible"
                       >
                         Open
                         <HiOutlineArrowUpRight size={12} />
@@ -199,12 +216,16 @@ export default function WorksTable() {
                     </div>
                   </td>
 
-                  <td className="px-6 py-3 text-right font-medium">
-                    {item.updated}
+                  <td className="px-5 py-3 text-right font-medium">
+                    <div className="flex">
+                      <div className="w-[90px] ml-5 text-left">
+                        {item.updated}
+                      </div>
+                    </div>
                   </td>
 
                   <td className="px-6 py-3 text-right">
-                    <div className="inline-block relative w-6 h-6 rounded-full overflow-hidden">
+                    <div className="inline-block relative mr-4 w-6 h-6 rounded-full overflow-hidden">
                       <Image
                         src={item.admin}
                         alt="admin"
@@ -214,21 +235,24 @@ export default function WorksTable() {
                     </div>
                   </td>
 
-                  <td className="px-6 py-3">
-                    <div className="flex items-center justify-end gap-2">
-                      {item.status === "Active" ? (
-                        <Image
-                          src="/tick.png"
-                          alt="tick"
-                          width={12}
-                          height={12}
-                        />
-                      ) : (
-                        <div className="w-4 h-4 rounded-full border-2 border-dotted border-[#13343B]" />
-                      )}
-                      <span className="font-medium text-[13px]">
-                        {item.status === "Active" ? "In use" : "Idle"}
-                      </span>
+                  <td className="px-3 py-3 text-right">
+                    <div className="flex justify-end ml-1">
+                      <div className="flex items-center gap-2 w-[90px] ">
+                        {item.status === "Active" ? (
+                          <Image
+                            src="/tick.png"
+                            alt="tick"
+                            width={13}
+                            height={13}
+                          />
+                        ) : (
+                          <div className="w-4 h-4 rounded-full border-2 border-dotted border-[#13343B]" />
+                        )}
+
+                        <span className="font-medium text-[14px]">
+                          {item.status === "Active" ? "In use" : "Idle"}
+                        </span>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -237,10 +261,7 @@ export default function WorksTable() {
           </table>
         )}
 
-        {/* DOCUMENT TAB */}
-        {activeTab !== null && (
-          <Document activeTab={activeTab}/>
-        )}
+        {activeTab !== null && <Document activeTab={activeTab} />}
       </div>
 
       {activeTab === null && (
