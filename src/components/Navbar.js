@@ -67,7 +67,7 @@ export default function Navbar({ onWorkspaceChange }) {
 
       {/* RIGHT */}
       <div className="flex items-center gap-4">
-        <button className="px-4 py-1.5 text-sm border border-[#DBDBD6]
+        <button className="px-4 py-1.5 bg-white text-sm border border-[#DBDBD6]
                            rounded-lg shadow shadow-[#0000001C] font-medium">
           Invite members
         </button>
